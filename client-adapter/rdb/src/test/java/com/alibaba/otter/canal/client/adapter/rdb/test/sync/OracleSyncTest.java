@@ -28,16 +28,18 @@ public class OracleSyncTest {
         dml.setDestination("example");
         dml.setTs(new Date().getTime());
         dml.setType("INSERT");
-        dml.setDatabase("mytest");
+        dml.setDatabase("Canteen");
         dml.setTable("user");
         List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> data = new LinkedHashMap<>();
         dataList.add(data);
-        data.put("id", 1L);
-        data.put("name", "Eric");
-        data.put("role_id", 1L);
-        data.put("c_time", new Date());
-        data.put("test1", "sdfasdfawe中国asfwef");
+        data.put("id", 337L);
+        data.put("name", "Eriched");
+        data.put("username", "testEric");
+        data.put("password", "123456");
+        data.put("tel_phone", "18573194921");
+        data.put("crt_user", 1L);
+        data.put("upd_user", 1L);
         dml.setData(dataList);
 
         rdbAdapter.sync(Collections.singletonList(dml));

@@ -1,0 +1,9 @@
+dataSourceKey: defaultDS
+destination: example
+outerAdapterKey: mysql-statistic
+concurrent: true
+dbMapping:
+  mirrorDb: true
+  database: Canteen
+  targetDb: statistic
+  targetTablePreName: auth

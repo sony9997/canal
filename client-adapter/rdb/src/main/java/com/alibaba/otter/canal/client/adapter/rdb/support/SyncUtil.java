@@ -264,6 +264,8 @@ public class SyncUtil {
         if (StringUtils.isNotEmpty(dbMapping.getTargetDb())) {
             result += dbMapping.getTargetDb() + ".";
         }
+        if(StringUtils.isNotEmpty(dbMapping.getTargetTablePreName()))
+            result+=dbMapping.getTargetTablePreName()+"_";
         result += dbMapping.getTargetTable();
         return result;
     }

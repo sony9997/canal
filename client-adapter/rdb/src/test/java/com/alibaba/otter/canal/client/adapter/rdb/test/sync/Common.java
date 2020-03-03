@@ -15,12 +15,12 @@ public class Common {
 
         OuterAdapterConfig outerAdapterConfig = new OuterAdapterConfig();
         outerAdapterConfig.setName("rdb");
-        outerAdapterConfig.setKey("oracle1");
+        outerAdapterConfig.setKey("mysql1");
         Map<String, String> properties = new HashMap<>();
-        properties.put("jdbc.driveClassName", "oracle.jdbc.OracleDriver");
-        properties.put("jdbc.url", "jdbc:oracle:thin:@127.0.0.1:49161:XE");
-        properties.put("jdbc.username", "mytest");
-        properties.put("jdbc.password", "m121212");
+        properties.put("jdbc.driveClassName", "com.mysql.jdbc.Driver");
+        properties.put("jdbc.url", "jdbc:mysql://127.0.0.1:31006/statistic?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF8");
+        properties.put("jdbc.username", "root");
+        properties.put("jdbc.password", "canteendb2019");
         outerAdapterConfig.setProperties(properties);
 
         RdbAdapter adapter = new RdbAdapter();

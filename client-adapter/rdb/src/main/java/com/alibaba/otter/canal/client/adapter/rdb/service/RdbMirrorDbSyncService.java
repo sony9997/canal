@@ -133,13 +133,19 @@ public class RdbMirrorDbSyncService {
             mappingConfig.setDbMapping(dbMapping);
             dbMapping.setDatabase(dml.getDatabase());
             dbMapping.setTable(dml.getTable());
-            dbMapping.setTargetDb(dml.getDatabase());
+            dbMapping.setTargetDb(
+                    StringUtils.isNotEmpty(baseConfigMap.getDbMapping().getTargetDb())?
+                            baseConfigMap.getDbMapping().getTargetDb():
+                    dml.getDatabase());
             dbMapping.setTargetTable(dml.getTable());
             dbMapping.setMapAll(true);
+            dbMapping.setTargetTablePreName(baseConfigMap.getDbMapping().getTargetTablePreName());
             List<String> pkNames = dml.getPkNames();
-            Map<String, String> pkMapping = new LinkedHashMap<>();
-            pkNames.forEach(pkName -> pkMapping.put(pkName, pkName));
-            dbMapping.setTargetPk(pkMapping);
+            if(pkNames!=null) {
+                Map<String, String> pkMapping = new LinkedHashMap<>();
+                pkNames.forEach(pkName -> pkMapping.put(pkName, pkName));
+                dbMapping.setTargetPk(pkMapping);
+            }
 
             mirrorDbConfig.getTableConfig().put(key, mappingConfig);
         }

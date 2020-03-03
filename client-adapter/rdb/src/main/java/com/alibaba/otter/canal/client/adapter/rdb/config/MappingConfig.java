@@ -103,6 +103,16 @@ public class MappingConfig {
 
         private Map<String, String> allMapColumns;
 
+        public String getTargetTablePreName() {
+            return targetTablePreName;
+        }
+
+        public void setTargetTablePreName(String targetTablePreName) {
+            this.targetTablePreName = targetTablePreName;
+        }
+
+        private String targetTablePreName;
+
         public boolean getMirrorDb() {
             return mirrorDb;
         }
