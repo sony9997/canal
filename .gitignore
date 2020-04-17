@@ -17,3 +17,6 @@ jtester.properties
 *.tar.gz
 *.rpm
 client-adapter/example/
+/logs/
+/.github/
+/.mvn/
