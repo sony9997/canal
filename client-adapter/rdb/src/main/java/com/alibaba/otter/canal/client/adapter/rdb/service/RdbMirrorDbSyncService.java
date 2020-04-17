@@ -151,6 +151,8 @@ public class RdbMirrorDbSyncService {
         }
     }
 
+    private static final String OLD_TABLE_NAME_FORMAT="`%s`.`%s`";
+    private static final String NEW_TABLE_NAME_FORMAT="`%s`.`%s_%s`";
     /**
      * DDL 操作
      *
@@ -158,13 +160,21 @@ public class RdbMirrorDbSyncService {
      */
     private void executeDdl(MirrorDbConfig mirrorDbConfig, Dml ddl) {
         try (Connection conn = dataSource.getConnection(); Statement statement = conn.createStatement()) {
-            statement.execute(ddl.getSql());
+            String sql=ddl.getSql();
+            MappingConfig.DbMapping mapping=mirrorDbConfig.getMappingConfig().getDbMapping();
+            if(mapping.getMirrorDb()&&StringUtils.isNotEmpty(mapping.getTargetTablePreName())){
+                String oldName=String.format(OLD_TABLE_NAME_FORMAT,ddl.getDatabase(),ddl.getTable());
+                String newName=String.format(NEW_TABLE_NAME_FORMAT,mapping.getTargetDb(),mapping.getTargetTablePreName(),ddl.getTable());
+                sql=sql.replace(oldName,newName);
+            }
+            statement.execute(sql);
             // 移除对应配置
             mirrorDbConfig.getTableConfig().remove(ddl.getTable());
             if (logger.isTraceEnabled()) {
                 logger.trace("Execute DDL sql: {} for database: {}", ddl.getSql(), ddl.getDatabase());
             }
         } catch (Exception e) {
+            System.out.println("sql===>>"+ddl.getSql());
             throw new RuntimeException(e);
         }
     }

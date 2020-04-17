@@ -33,7 +33,8 @@ public class OracleSyncTest {
         List<Map<String, Object>> dataList = new ArrayList<>();
         Map<String, Object> data = new LinkedHashMap<>();
         dataList.add(data);
-        data.put("id", 337L);
+        data.put("id", 338L);
+        data.put("address", "changsha");
         data.put("name", "Eriched");
         data.put("username", "testEric");
         data.put("password", "123456");
@@ -41,6 +42,19 @@ public class OracleSyncTest {
         data.put("crt_user", 1L);
         data.put("upd_user", 1L);
         dml.setData(dataList);
+
+        rdbAdapter.sync(Collections.singletonList(dml));
+    }
+
+    @Test
+    public void testDDL(){
+        Dml dml = new Dml();
+        dml.setDestination("example");
+        dml.setTs(new Date().getTime());
+        dml.setDatabase("Canteen");
+        dml.setTable("user");
+        dml.setIsDdl(true);
+        dml.setSql("ALTER TABLE Canteen."+dml.getTable()+" CHANGE test2col testcol INT");
 
         rdbAdapter.sync(Collections.singletonList(dml));
     }

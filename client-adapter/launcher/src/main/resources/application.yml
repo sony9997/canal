@@ -9,7 +9,7 @@ spring:
 canal.conf:
   mode: tcp # kafka rocketMQ
 #  canalServerHost: 39.98.45.74:7111
-  zookeeperHosts: 39.98.45.74:2181
+  zookeeperHosts: 39.100.36.75:2181
 #  mqServers: 127.0.0.1:9092 #or rocketmq
 #  flatMessage: true
   batchSize: 500
